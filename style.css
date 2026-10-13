@@ -1,0 +1,79 @@
+:root{
+  --ink:#14181F; --muted:#4F5864; --accent:#1F4E5F; --accent-dark:#163947;
+  --tint:#EEF2F4; --line:#DCE2E6; --bg:#FFFFFF;
+  --serif:"Fraunces",Georgia,serif; --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --max:1100px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans)}
+a{color:var(--accent)}
+a:hover{color:var(--accent-dark)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+h1{font-size:clamp(2.2rem,5.4vw,4rem);max-width:18ch;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:.6em}
+h3{font-size:1.15rem;margin-bottom:.3em}
+p{margin:0 0 1em;max-width:68ch}
+
+.site-header{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;max-width:var(--max);margin:0 auto;padding:24px}
+.brand{font:600 1.25rem var(--serif);color:var(--ink);text-decoration:none}
+.site-header nav{display:flex;flex-wrap:wrap;gap:8px 28px}
+.site-header nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:.95rem;padding:6px 0;border-bottom:2px solid transparent}
+.site-header nav a:hover{border-color:var(--accent)}
+
+main,.contact{max-width:var(--max);margin:0 auto;padding:0 24px}
+.hero{padding:clamp(48px,9vw,112px) 0 clamp(48px,7vw,88px)}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1.4em;max-width:62ch}
+.lead.small{font-size:1.05rem;margin-top:0}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:2em}
+.button{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:4px;border:2px solid var(--accent)}
+.button:hover{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff}
+.button.ghost{background:transparent;color:var(--accent)}
+.button.ghost:hover{background:var(--tint);color:var(--accent-dark)}
+
+.section{padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line)}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,64px);align-items:start}
+.placeholder{background:var(--tint);color:var(--muted);min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border-radius:4px}
+.facts{display:grid;gap:12px;margin:1.6em 0 0}
+.facts div{display:grid;grid-template-columns:9rem 1fr;gap:12px;padding-top:12px;border-top:1px solid var(--line)}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;font-weight:500}
+.steps{list-style:none;counter-reset:s;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.steps li{counter-increment:s;border-top:3px solid var(--accent);padding-top:14px}
+.steps li::before{content:counter(s);display:block;font:600 1.6rem var(--serif);color:var(--accent);margin-bottom:.2em}
+.steps p{color:var(--muted);font-size:.97rem;margin:0}
+.note{color:var(--muted);font-size:.92rem;margin:28px 0 0}
+
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.skills p{color:var(--muted);margin:0}
+
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 32px;margin-top:36px;align-items:start}
+figure{margin:0}
+figure img{display:block;width:100%;height:auto;background:var(--tint);border-radius:4px}
+.double{grid-column:span 2}
+.double div{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wide{grid-column:1/-1}
+figcaption{margin-top:12px;font-size:.95rem;color:var(--muted)}
+figcaption strong{display:block;color:var(--ink);font:600 1.05rem var(--serif);margin-bottom:2px}
+.role{display:block;color:var(--accent);font-weight:500;margin-top:4px}
+
+.contact{padding-top:56px;padding-bottom:64px;margin-top:40px;max-width:none;background:var(--ink);color:#fff}
+.contact>*{max-width:var(--max);margin-left:auto;margin-right:auto;padding:0 24px}
+.contact p{color:#D5DAE1}
+.contact a{color:#fff}
+.contact .fine{font-size:.85rem;color:#AEB6C1;margin-top:2em}
+
+@media(max-width:900px){
+  .split{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .skills{grid-template-columns:1fr}
+  .work{grid-template-columns:1fr 1fr}
+  .double{grid-column:1/-1}
+}
+@media(max-width:560px){
+  body{font-size:16px}
+  .steps,.work{grid-template-columns:1fr}
+  .facts div{grid-template-columns:1fr;gap:2px}
+}

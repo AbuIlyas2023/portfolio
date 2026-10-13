@@ -215,15 +215,15 @@ p{margin:0 0 1em;max-width:66ch}
 .card.hide{display:none}
 .card.pop{animation:pop .45s var(--ease)}
 @keyframes pop{from{opacity:0;transform:scale(.96) translateY(10px)}}
-.card-media{position:relative;display:grid;place-items:center;aspect-ratio:4/3.3;padding:26px;background:var(--stage);border:0;cursor:zoom-in;overflow:hidden;width:100%;--mx:50%;--my:50%}
+.card-media{position:relative;display:grid;place-items:center;aspect-ratio:4/3.3;padding:26px;background:var(--stage);border:0;cursor:zoom-in;overflow:hidden;width:100%;isolation:isolate;--mx:50%;--my:50%}
 .card.wide .card-media{aspect-ratio:auto;min-height:330px}
 .card-media::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),color-mix(in srgb,var(--accent) 22%,transparent),transparent 60%);opacity:0;transition:opacity .3s}
 .card-media:hover::before{opacity:1}
-.card-media img{position:relative;max-height:100%;max-width:100%;object-fit:contain;box-shadow:0 2px 6px rgba(0,0,0,.1),0 18px 34px -16px rgba(0,0,0,.35);border-radius:3px;transition:transform .6s var(--ease)}
+.card-media img{position:relative;z-index:1;max-height:100%;max-width:100%;object-fit:contain;box-shadow:0 2px 6px rgba(0,0,0,.1),0 18px 34px -16px rgba(0,0,0,.35);border-radius:3px;transition:transform .6s var(--ease)}
 .card.wide .card-media img{max-height:280px}
 .card-media:hover img{transform:translateY(-6px) rotate(-1.2deg) scale(1.03)}
 .card-media.stack img{outline:0}
-.card-media.stack::after{content:"";position:absolute;width:var(--sw,60%);height:var(--sh,70%);background:var(--surface);border-radius:3px;box-shadow:0 4px 18px -8px rgba(0,0,0,.3);transform:rotate(4deg) translate(10px,6px);opacity:0;transition:opacity .4s,transform .6s var(--ease)}
+.card-media.stack::after{content:"";position:absolute;z-index:0;width:var(--sw,60%);height:var(--sh,70%);background:var(--surface);border-radius:3px;box-shadow:0 4px 18px -8px rgba(0,0,0,.3);transform:rotate(4deg) translate(10px,6px);opacity:0;transition:opacity .4s,transform .6s var(--ease)}
 .card-media.stack:hover::after{opacity:1;transform:rotate(6deg) translate(18px,8px)}
 .logo-media img{width:70%;box-shadow:none;background:transparent}
 .badge{position:absolute;top:14px;left:14px;font:500 .72rem var(--mono);background:var(--ink);color:var(--bg);padding:5px 10px;border-radius:999px;z-index:2}

@@ -64,6 +64,8 @@ p{margin:0 0 1em;max-width:66ch}
 :root[data-theme="dark"] .i-sun{display:none} :root[data-theme="dark"] .i-moon{display:block}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .i-sun{display:none}:root:not([data-theme="light"]) .i-moon{display:block}}
 .menu-btn{display:none}
+.cv-link{display:inline-flex;align-items:center;gap:6px;height:42px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:600 .9rem var(--sans);white-space:nowrap;transition:background .25s,color .25s}
+.cv-link:hover{background:var(--accent);color:var(--accent-ink)}
 .menu-btn span{display:block;width:16px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s}
 .menu-btn{flex-direction:column;justify-content:center;align-items:center;gap:5px}
 
@@ -265,7 +267,7 @@ p{margin:0 0 1em;max-width:66ch}
 .vbtn.close{width:40px;justify-content:center;padding:9px 0}
 .vbtn[hidden]{display:none}
 .viewer-stage{position:relative;display:grid;place-items:center;min-height:0;padding:0 70px}
-.viewer-img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.5);border-radius:3px;background:#fff;transition:opacity .25s,transform .35s var(--ease)}
+.viewer-img{max-width:100%;max-height:calc(100vh - 190px);max-height:calc(100dvh - 190px);object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.5);border-radius:3px;background:#fff;transition:opacity .25s,transform .35s var(--ease)}
 .viewer-img.loading{opacity:.2;transform:scale(.98)}
 .vnav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:2rem;line-height:1;cursor:pointer;transition:background .2s}
 .vnav:hover{background:rgba(255,255,255,.16)}
@@ -310,6 +312,9 @@ p{margin:0 0 1em;max-width:66ch}
 .js .reveal.seen{opacity:1;transform:none}
 
 /* ---------- responsive ---------- */
+@media (max-width:1200px){
+  .c2{right:-4%} .c1{left:-4%}
+}
 @media (max-width:980px){
   .hero-inner{grid-template-columns:1fr}
   .hero-visual{width:min(78%,360px);order:-1;margin-top:20px}
@@ -329,6 +334,7 @@ p{margin:0 0 1em;max-width:66ch}
   .menu-btn[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
 }
 @media (max-width:640px){
+  .cv-link{height:42px;padding:0 13px;font-size:.82rem}
   body{font-size:16px}
   .hero{min-height:auto;padding:24px 0 64px}
   .chip{font-size:.72rem;padding:7px 11px}

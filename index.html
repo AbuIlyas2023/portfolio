@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 <script>
   /* Sæt tema før siden tegnes, så den ikke blinker */
   (function(){try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
@@ -34,6 +34,7 @@
     <a href="#kontakt">Kontakt</a>
   </nav>
   <div class="header-tools">
+    <a class="cv-link" href="pdf/CV-Sinan-Polat.pdf" download="CV-Sinan-Polat.pdf">Download CV <span aria-hidden="true">↓</span></a>
     <button class="icon-btn" id="themeToggle" type="button" aria-label="Skift mellem lyst og mørkt tema">
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -52,10 +53,10 @@
       <div class="hero-text">
         <p class="status reveal"><span class="pulse"></span>Søger en rolle inden for UX &amp; brugerresearch</p>
         <h1 class="reveal">Jeg gør komplekse <span class="rotator" aria-live="polite"><span class="rotator-word">offentlige data</span></span> lette at finde og forstå.</h1>
-        <p class="lead reveal">Hej, jeg hedder Sinan 👋 Jeg er færdiguddannet multimediedesigner og arbejder dér, hvor <strong>brugerresearch</strong>, <strong>informationsarkitektur</strong> og <strong>visuel formidling</strong> mødes. Hos KOMBIT har jeg designet materialer til alle 98 kommuner, og 18. december 2026 afleverer jeg min professionsbachelor i Digital Konceptudvikling.</p>
+        <p class="lead reveal">Hej, jeg hedder Sinan 👋 Jeg er multimediedesigner og arbejder dér, hvor <strong>brugerresearch</strong>, <strong>informationsarkitektur</strong> og <strong>visuel formidling</strong> mødes. Hos KOMBIT har jeg designet materialer til alle 98 kommuner, og 18. december 2026 afleverer jeg min professionsbachelor i Digital Konceptudvikling.</p>
         <p class="actions reveal">
           <a class="button magnetic" href="#arbejde">Se mit arbejde <span aria-hidden="true">→</span></a>
-          <a class="button ghost magnetic" href="#bachelor">Bachelorprojektet</a>
+          <button class="button ghost magnetic" type="button" data-viewer data-slug="cv" data-pages="2" data-pdf="pdf/CV-Sinan-Polat.pdf" data-title="CV – Sinan Polat">Se mit CV</button>
         </p>
       </div>
       <div class="hero-visual reveal" data-parallax>
@@ -88,7 +89,7 @@
     <div class="about-text">
       <p class="eyebrow reveal">01 — Om mig</p>
       <h2 class="reveal">Fra fagtungt indhold til noget, folk <em>faktisk</em> kan bruge.</h2>
-      <p class="reveal">Som studentermedhjælper og praktikant i KOMBITs kommunikationsafdeling har jeg arbejdet tæt på de fælleskommunale it-løsninger: FLIS, DUBU, KY og Bibliotekernes Data og It. Målgruppen er ledere, sagsbehandlere og specialister i 98 kommuner, og indholdet er ofte tungt: lovgivning, data og systemer.</p>
+      <p class="reveal">Siden april 2024 har jeg været studentermedhjælper og praktikant i KOMBITs kommunikationsafdeling. Her har jeg arbejdet tæt på de fælleskommunale it-løsninger FLIS, DUBU, KY og Bibliotekernes Data og It og lavet indhold til hjemmeside, nyhedsbreve, LinkedIn, Digitaliseringsmessen og podcasten Den Grønne Kode. Målgruppen er ledere, sagsbehandlere og specialister i 98 kommuner, og indholdet er ofte tungt: lovgivning, data og systemer.</p>
       <p class="reveal">Min opgave har været at <strong>oversætte</strong>. Først forstår jeg, hvem der skal bruge materialet og hvorfor. Så strukturerer jeg indholdet, og til sidst gør jeg det visuelt. Det er den samme tankegang, jeg bruger i UX-arbejdet.</p>
       <ul class="principles reveal">
         <li><span>01</span>Brugeren før løsningen</li>
@@ -351,14 +352,15 @@
   <div class="contact-inner">
     <p class="eyebrow">06 — Kontakt</p>
     <h2 class="big">Lad os gøre noget <em>komplekst</em> enkelt.</h2>
-    <p>Jeg søger en rolle inden for UX og brugerresearch. Fuldt CV og flere eksempler sender jeg gerne.</p>
+    <p>Jeg søger en rolle inden for UX og brugerresearch. Hent mit CV, eller skriv direkte til mig.</p>
     <div class="contact-actions">
       <button class="button light magnetic" type="button" id="copyMail" data-mail="sinanp2020@hotmail.com">
         <span class="copy-label">sinanp2020@hotmail.com</span><span class="copy-ico" aria-hidden="true">⧉</span>
       </button>
+      <a class="button ghost-light magnetic" href="pdf/CV-Sinan-Polat.pdf" download="CV-Sinan-Polat.pdf">Download CV ↓</a>
       <a class="button ghost-light magnetic" href="tel:+4550584245">5058 4245</a>
       <!-- Indsæt din LinkedIn-adresse her: -->
-      <a class="button ghost-light magnetic" href="https://www.linkedin.com/in/DIT-BRUGERNAVN" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="button ghost-light magnetic" href="www.linkedin.com/in/sinan-polat-sp" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
     <p class="fine">Kokkedal · Materialerne er produceret hos KOMBIT og vises med tilladelse. · Siden er håndkodet i HTML, CSS og JavaScript.</p>
   </div>
@@ -402,6 +404,6 @@
 </div>
 
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="script.js" defer></script>
+<script src="script.js?v=2" defer></script>
 </body>
 </html>

@@ -27,6 +27,17 @@
   });
   $$('a', nav).forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
 
+  /* ---------- Interne links: scroll blødt uden at ændre adressen (#top osv.) ---------- */
+  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = id === 'top' ? document.body : document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    if (id === 'top') scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  }));
+
   /* ---------- Scroll: progress-bar, header og aktiv menu ---------- */
   const bar = $('.progress'), header = $('.site-header');
   const sections = $$('main section[id], footer[id]');
@@ -309,10 +320,12 @@
   const openViewer = card => {
     const slug = card.dataset.slug, n = +card.dataset.pages, pdf = card.dataset.pdf, svg = card.dataset.svg;
     vPages = svg ? [svg] : Array.from({ length: n }, (_, i) => `work/${slug}/${i + 1}.jpg`);
-    $('.viewer-title').textContent = $('h3', card).textContent;
-    vImg.alt = $('img', card).alt;
+    const title = card.dataset.title || $('h3', card).textContent;
+    $('.viewer-title').textContent = title;
+    vImg.alt = card.dataset.title || $('img', card).alt;
     const file = pdf || svg || vPages[0];
     vOpen.href = file; vDown.href = file;
+    vDown.setAttribute('download', file.split('/').pop());
     vOpen.textContent = pdf ? 'Åbn PDF ↗' : 'Åbn original ↗';
     vThumbs.innerHTML = vPages.length > 1 ? vPages.map((p, i) => `<button type="button" aria-label="Gå til side ${i + 1}"><img src="${p}" alt="" loading="lazy"></button>`).join('') : '';
     $$('button', vThumbs).forEach((b, i) => b.addEventListener('click', () => showPage(i)));
@@ -329,6 +342,7 @@
     if (lastFocus) lastFocus.focus();
   };
   cards.forEach(c => $('.card-media', c).addEventListener('click', () => openViewer(c)));
+  $$('[data-viewer]').forEach(b => b.addEventListener('click', () => openViewer(b)));
   $('#viewerClose').addEventListener('click', closeViewer);
   $('.vnav.prev').addEventListener('click', () => showPage(vIdx - 1));
   $('.vnav.next').addEventListener('click', () => showPage(vIdx + 1));
@@ -369,6 +383,7 @@
     { q: 'Hvad søger du?', a: 'En rolle inden for UX og brugerresearch, gerne hvor komplekst indhold eller data skal gøres brugbart for rigtige mennesker. Det offentlige og B2B-tunge domæner er mit hjemmebane.' },
     { q: 'Hvad handler dit bachelorprojekt om?', a: 'Valg.dk som dataformidlingsplatform. Jeg undersøger, hvordan borgere, journalister, analytikere og kommunale medarbejdere finder data, og designer en ny informationsstruktur med indgange efter brugergruppe. <a href="#bachelor">Se det her</a>.' },
     { q: 'Hvilke værktøjer bruger du?', a: 'Figma til wireframes og prototyper, InDesign og Illustrator til tryk og layout, og HTML, CSS og JavaScript til web. Denne side er håndkodet.' },
+    { q: 'Kan jeg se dit CV?', a: 'Selvfølgelig! <a href="pdf/CV-Sinan-Polat.pdf" target="_blank" rel="noopener">Åbn mit CV her</a> eller <a href="pdf/CV-Sinan-Polat.pdf" download="CV-Sinan-Polat.pdf">download det som PDF</a>.' },
     { q: 'Hvordan kontakter jeg dig?', a: 'Skriv til <a href="mailto:sinanp2020@hotmail.com">sinanp2020@hotmail.com</a> eller ring på <a href="tel:+4550584245">5058 4245</a>. Jeg svarer hurtigt 😊' }
   ];
   const botBtn = $('#botBtn'), botPanel = $('#botPanel'), log = $('.bot-log'), chips = $('.bot-chips');

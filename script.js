@@ -1,0 +1,410 @@
+/* =========================================================
+   Sinan Polat – portfolio · interaktivitet
+   ========================================================= */
+(() => {
+  'use strict';
+  document.documentElement.classList.add('js');
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(pointer: fine)').matches;
+
+  /* ---------- Tema (lys/mørk) ---------- */
+  const root = document.documentElement;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  $('#themeToggle').addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('tema', next); } catch (e) {}
+    $('meta[name="theme-color"]').content = next === 'dark' ? '#101114' : '#F5F2EC';
+  });
+
+  /* ---------- Mobilmenu ---------- */
+  const menuBtn = $('#menuBtn'), nav = $('#nav');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  $$('a', nav).forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
+
+  /* ---------- Scroll: progress-bar, header og aktiv menu ---------- */
+  const bar = $('.progress'), header = $('.site-header');
+  const sections = $$('main section[id], footer[id]');
+  const navLinks = $$('.nav a');
+  const onScroll = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+    header.classList.toggle('scrolled', scrollY > 10);
+    let current = '';
+    sections.forEach(s => { if (s.getBoundingClientRect().top < innerHeight * 0.4) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Reveal ved scroll ---------- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('seen');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  // lille forskydning, så elementer i samme gruppe kommer ind efter hinanden
+  $$('.reveal').forEach(el => {
+    const sibs = $$(':scope > .reveal', el.parentElement);
+    el.style.setProperty('--d', `${Math.min(sibs.indexOf(el), 5) * 0.08}s`);
+    io.observe(el);
+  });
+
+  /* ---------- Roterende ord i overskriften ---------- */
+  const words = ['offentlige data', 'valgresultater', 'velfærdssystemer', 'regler og politikker', 'datablade'];
+  const word = $('.rotator-word');
+  let wi = 0;
+  if (!reduceMotion) setInterval(() => {
+    word.classList.add('out');
+    setTimeout(() => {
+      wi = (wi + 1) % words.length;
+      word.textContent = words[wi];
+      word.classList.remove('out'); word.classList.add('in');
+      requestAnimationFrame(() => requestAnimationFrame(() => word.classList.remove('in')));
+    }, 350);
+  }, 2600);
+
+  /* ---------- Hero: interaktivt "datafelt" af prikker ---------- */
+  const canvas = $('.hero-field');
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    const hero = $('.hero');
+    let w, h, dpr, dots = [], mouse = { x: -999, y: -999 }, raf = null, t0 = performance.now();
+    const GAP = 30;
+    const resize = () => {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = hero.clientWidth; h = hero.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dots = [];
+      for (let y = GAP / 2; y < h; y += GAP) for (let x = GAP / 2; x < w; x += GAP) dots.push({ x, y });
+      draw(performance.now());
+    };
+    const color = () => getComputedStyle(root).getPropertyValue('--ink').trim();
+    const accent = () => getComputedStyle(root).getPropertyValue('--accent').trim();
+    function draw(now) {
+      const ink = color(), acc = accent();
+      ctx.clearRect(0, 0, w, h);
+      const t = (now - t0) / 1000;
+      for (const d of dots) {
+        const dx = d.x - mouse.x, dy = d.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const near = Math.max(0, 1 - dist / 150);
+        // en langsom bølge, så feltet føles levende
+        const wave = reduceMotion ? 0 : (Math.sin(d.x * 0.012 + t * 0.8) + Math.cos(d.y * 0.015 + t * 0.6)) * 0.25 + 0.5;
+        const r = 1 + near * 3.2 + wave * 0.5;
+        const push = near * 10;
+        const px = d.x + (dist ? dx / dist : 0) * push, py = d.y + (dist ? dy / dist : 0) * push;
+        ctx.globalAlpha = 0.08 + wave * 0.07 + near * 0.6;
+        ctx.fillStyle = near > 0.05 ? acc : ink;
+        ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    let visible = true;
+    const loop = now => { draw(now); raf = visible && !reduceMotion ? requestAnimationFrame(loop) : null; };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf && !reduceMotion) raf = requestAnimationFrame(loop); }).observe(hero);
+    hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; if (reduceMotion) draw(performance.now()); });
+    hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -999; });
+    addEventListener('resize', resize);
+    resize();
+  }
+
+  /* ---------- Parallax på chips ved portrættet ---------- */
+  const pv = $('[data-parallax]');
+  if (pv && finePointer && !reduceMotion) {
+    $('.hero').addEventListener('pointermove', e => {
+      const cx = e.clientX / innerWidth - 0.5, cy = e.clientY / innerHeight - 0.5;
+      $$('.chip', pv).forEach(c => { const d = +c.dataset.depth; c.style.transform = `translate(${cx * d}px, ${cy * d}px)`; });
+    });
+  }
+
+  /* ---------- Magnetiske knapper ---------- */
+  if (finePointer && !reduceMotion) $$('.magnetic').forEach(b => {
+    b.addEventListener('pointermove', e => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.18}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
+    });
+    b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+  });
+
+  /* ---------- Tællere ---------- */
+  const countIO = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count, dur = reduceMotion ? 1 : 1400, start = performance.now();
+    const tick = now => {
+      const p = Math.min(1, (now - start) / dur);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    countIO.unobserve(el);
+  }), { threshold: 0.6 });
+  $$('[data-count]').forEach(el => countIO.observe(el));
+
+  /* ---------- Bachelor: koncept med indgange pr. brugergruppe ---------- */
+  const personas = {
+    borger:     { path: 'borger', who: 'borgere', title: 'Hvem blev valgt i min kommune?', search: 'Skriv din kommune eller dit postnummer',
+                  tasks: ['Se resultatet for dit valgsted', 'Hvem blev valgt?', 'Sammenlign med sidste valg'], chart: [40, 65, 30, 55, 20, 45] },
+    journalist: { path: 'presse', who: 'journalister', title: 'Tallene til historien, hurtigt', search: 'Søg efter parti, kandidat eller område',
+                  tasks: ['Største ændringer siden sidst', 'Hent tabel som CSV', 'Citerbar kilde og tidsstempel'], chart: [85, 30, 70, 25, 60, 40] },
+    analytiker: { path: 'data', who: 'analytikere', title: 'Rådata, tidsserier og API', search: 'Søg i datasæt og variabler',
+                  tasks: ['Datasæt og API-adgang', 'Tidsserier på tværs af valg', 'Dokumentation af variabler'], chart: [20, 35, 50, 65, 80, 95] },
+    kommune:    { path: 'kommune', who: 'kommunale medarbejdere', title: 'Afvikling og opgørelse af valget', search: 'Søg i vejledninger og frister',
+                  tasks: ['Status på indberetning', 'Frister og tjeklister', 'Vejledninger til valgstyrere'], chart: [60, 60, 80, 45, 90, 70] }
+  };
+  const mock = $('.browser-body');
+  const setPersona = key => {
+    const p = personas[key];
+    mock.classList.add('swap');
+    setTimeout(() => {
+      $('.mock-path').textContent = p.path;
+      $('.mock-who').textContent = p.who;
+      $('.mock-title').textContent = p.title;
+      $('.mock-placeholder').textContent = p.search;
+      $('.mock-tasks').innerHTML = p.tasks.map(t => `<li>${t}</li>`).join('');
+      $$('.mock-chart i').forEach((b, i) => { b.style.height = p.chart[i] + '%'; });
+      mock.classList.remove('swap');
+    }, 200);
+  };
+  $$('.persona-tabs button').forEach(btn => btn.addEventListener('click', () => {
+    $$('.persona-tabs button').forEach(b => b.setAttribute('aria-selected', b === btn));
+    setPersona(btn.dataset.persona);
+  }));
+  setPersona('borger');
+
+  /* ---------- Bachelor: Double Diamond ---------- */
+  const steps = [
+    { t: 'Discover', d: 'Interviews og observationer med brugere af Valg.dk, så jeg kunne forstå, hvem der bruger siden, hvad de leder efter, og hvor de går i stå.',
+      m: ['Semistrukturerede interviews', 'Observation', 'Desk research', 'Heuristisk evaluering'] },
+    { t: 'Define', d: 'Dataene findes, men strukturen er bygget op om valgets afvikling og ikke om brugernes spørgsmål. Fire brugergrupper med meget forskellige mål deler én indgang, og det skaber friktion.',
+      m: ['Affinity-diagram', 'Personas', 'Brugerrejser', 'How Might We'] },
+    { t: 'Develop', d: 'Koncept for en ny informationsstruktur med indgange efter brugergruppe, så hver målgruppe hurtigt kommer frem til de data, der er relevante for den.',
+      m: ['Informationsarkitektur', 'Sitemap', 'Wireframes', 'Lo-fi prototyper'] },
+    { t: 'Deliver', d: 'Prototypen testes 11. november 2026 med kommunale medarbejdere. Fundene bruges til at iterere på designet inden afleveringen.',
+      m: ['Hi-fi prototype i Figma', 'Usability-test', 'Tænke højt-metoden', 'Iteration'] }
+  ];
+  const zones = $$('.dd-zone');
+  const panel = $('.step-panel');
+  const setStep = i => {
+    zones.forEach(z => z.classList.toggle('on', +z.dataset.step === i));
+    $('.step-num span', panel).textContent = i + 1;
+    $('.step-title', panel).textContent = steps[i].t;
+    $('.step-text', panel).textContent = steps[i].d;
+    $('.step-tags', panel).innerHTML = steps[i].m.map(x => `<li>${x}</li>`).join('');
+    [$('.step-title', panel), $('.step-text', panel), $('.step-tags', panel)].forEach(el => { el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade'); });
+  };
+  let stepAuto = null, stepIdx = 0;
+  zones.forEach(z => {
+    const go = () => { clearInterval(stepAuto); setStep(+z.dataset.step); };
+    z.addEventListener('click', go);
+    z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  });
+  setStep(0);
+  // kører automatisk igennem faserne, indtil brugeren selv klikker
+  if (!reduceMotion) new IntersectionObserver(([e], obs) => {
+    if (!e.isIntersecting) return;
+    stepAuto = setInterval(() => { stepIdx = (stepIdx + 1) % 4; setStep(stepIdx); }, 3500);
+    obs.disconnect();
+  }, { threshold: 0.5 }).observe($('.process'));
+
+  /* ---------- Datademo: regioner (tal fra A1-plakaten) ---------- */
+  const regions = [
+    { n: 'Hovedstaden', v: 1842285, c: '#8E5BB5' },
+    { n: 'Midtjylland', v: 1383982, c: '#D9443A' },
+    { n: 'Syddanmark', v: 1243943, c: '#4E9A57' },
+    { n: 'Sjælland', v: 858149, c: '#E58A2E' },
+    { n: 'Nordjylland', v: 593087, c: '#D8B630' }
+  ];
+  const total = regions.reduce((s, r) => s + r.v, 0);
+  const max = Math.max(...regions.map(r => r.v));
+  const barsEl = $('#bars');
+  barsEl.innerHTML = regions.map(r => `
+    <div class="bar-row" title="Region ${r.n}">
+      <span class="bar-label">Region ${r.n}</span>
+      <div class="bar-track"><div class="bar-fill" style="--c:${r.c}"></div><span class="bar-val">0</span></div>
+    </div>`).join('') + `<p class="bar-total">I alt ${total.toLocaleString('da-DK')} borgere · Kilde: min A1-plakat</p>`;
+  let mode = 'antal', barsShown = false;
+  const renderBars = () => {
+    $$('.bar-row', barsEl).forEach((row, i) => {
+      const r = regions[i];
+      const share = r.v / total;
+      const width = mode === 'antal' ? r.v / max : share / (max / total);
+      $('.bar-fill', row).style.width = barsShown ? (width * 100) + '%' : '0';
+      animateNumber($('.bar-val', row), mode === 'antal' ? r.v : share * 100, mode);
+    });
+  };
+  function animateNumber(el, to, m) {
+    const from = parseFloat(el.dataset.v || 0), start = performance.now(), dur = reduceMotion ? 1 : 900;
+    el.dataset.v = to;
+    const step = now => {
+      const p = Math.min(1, (now - start) / dur), v = from + (to - from) * (1 - Math.pow(1 - p, 3));
+      el.textContent = m === 'antal' ? Math.round(v).toLocaleString('da-DK') : v.toFixed(1).replace('.', ',') + ' %';
+      if (p < 1) requestAnimationFrame(step);
+    };
+    if (barsShown) requestAnimationFrame(step);
+  }
+  new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { barsShown = true; renderBars(); obs.disconnect(); } }, { threshold: 0.35 }).observe(barsEl);
+  $$('.toggle button').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('.toggle button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
+    // nulstil tal, så overgangen mellem % og antal er tydelig
+    $$('.bar-val', barsEl).forEach(v => { v.dataset.v = 0; });
+    renderBars();
+  }));
+
+  /* ---------- Galleri: filtre ---------- */
+  const cards = $$('.card');
+  $$('.filters button').forEach(btn => btn.addEventListener('click', () => {
+    const f = btn.dataset.filter;
+    $$('.filters button').forEach(b => { b.classList.toggle('on', b === btn); b.setAttribute('aria-pressed', b === btn); });
+    cards.forEach(c => {
+      const show = f === 'alle' || c.dataset.cat.split(' ').includes(f);
+      c.classList.toggle('hide', !show);
+      if (show) { c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); }
+    });
+  }));
+
+  /* ---------- Galleri: lys der følger musen + 3D-tilt ---------- */
+  if (finePointer && !reduceMotion) cards.forEach(c => {
+    const m = $('.card-media', c);
+    m.addEventListener('pointermove', e => {
+      const r = m.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      m.style.setProperty('--mx', x * 100 + '%'); m.style.setProperty('--my', y * 100 + '%');
+      c.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 5}deg) rotateY(${(x - 0.5) * 6}deg)`;
+    });
+    m.addEventListener('pointerleave', () => { c.style.transform = ''; });
+  });
+  // sæt "stak af papir"-effekten til samme form som forsiden
+  $$('.card-media.stack img').forEach(img => {
+    const set = () => { const m = img.parentElement; m.style.setProperty('--sw', img.offsetWidth + 'px'); m.style.setProperty('--sh', img.offsetHeight + 'px'); };
+    img.complete ? set() : img.addEventListener('load', set);
+    addEventListener('resize', set);
+  });
+
+  /* ---------- Viewer: blad i sider (JPG) + åbn/download PDF ---------- */
+  const viewer = $('#viewer'), vImg = $('.viewer-img'), vThumbs = $('.viewer-thumbs');
+  const vOpen = $('#viewerOpen'), vDown = $('#viewerDownload');
+  let vPages = [], vIdx = 0, lastFocus = null;
+  const showPage = i => {
+    vIdx = (i + vPages.length) % vPages.length;
+    vImg.classList.add('loading');
+    const src = vPages[vIdx];
+    const pre = new Image();
+    pre.onload = () => { vImg.src = src; vImg.classList.remove('loading'); };
+    pre.src = src;
+    if (vPages[vIdx + 1]) new Image().src = vPages[vIdx + 1]; // forudindlæs næste side
+    $('.viewer-count').textContent = vPages.length > 1 ? `Side ${vIdx + 1} af ${vPages.length}` : '';
+    $$('button', vThumbs).forEach((b, j) => b.classList.toggle('on', j === vIdx));
+    const active = $$('button', vThumbs)[vIdx];
+    if (active) active.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+  const openViewer = card => {
+    const slug = card.dataset.slug, n = +card.dataset.pages, pdf = card.dataset.pdf, svg = card.dataset.svg;
+    vPages = svg ? [svg] : Array.from({ length: n }, (_, i) => `work/${slug}/${i + 1}.jpg`);
+    $('.viewer-title').textContent = $('h3', card).textContent;
+    vImg.alt = $('img', card).alt;
+    const file = pdf || svg || vPages[0];
+    vOpen.href = file; vDown.href = file;
+    vOpen.textContent = pdf ? 'Åbn PDF ↗' : 'Åbn original ↗';
+    vThumbs.innerHTML = vPages.length > 1 ? vPages.map((p, i) => `<button type="button" aria-label="Gå til side ${i + 1}"><img src="${p}" alt="" loading="lazy"></button>`).join('') : '';
+    $$('button', vThumbs).forEach((b, i) => b.addEventListener('click', () => showPage(i)));
+    $$('.vnav', viewer).forEach(b => b.hidden = vPages.length < 2);
+    lastFocus = document.activeElement;
+    viewer.hidden = false;
+    document.body.style.overflow = 'hidden';
+    showPage(0);
+    $('#viewerClose').focus();
+  };
+  const closeViewer = () => {
+    viewer.hidden = true; vImg.removeAttribute('src');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  };
+  cards.forEach(c => $('.card-media', c).addEventListener('click', () => openViewer(c)));
+  $('#viewerClose').addEventListener('click', closeViewer);
+  $('.vnav.prev').addEventListener('click', () => showPage(vIdx - 1));
+  $('.vnav.next').addEventListener('click', () => showPage(vIdx + 1));
+  $('.viewer-stage').addEventListener('click', e => { if (e.target === e.currentTarget) closeViewer(); });
+  addEventListener('keydown', e => {
+    if (viewer.hidden) return;
+    if (e.key === 'Escape') closeViewer();
+    if (e.key === 'ArrowRight') showPage(vIdx + 1);
+    if (e.key === 'ArrowLeft') showPage(vIdx - 1);
+    if (e.key === 'Tab') { // hold fokus inde i dialogen
+      const f = $$('a[href], button:not([hidden])', viewer).filter(x => x.offsetParent);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+  let touchX = null;
+  viewer.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  viewer.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50 && vPages.length > 1) showPage(vIdx + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+
+  /* ---------- Kopiér e-mail ---------- */
+  const toast = $('.toast');
+  const showToast = msg => { toast.textContent = msg; toast.classList.add('show'); clearTimeout(showToast.t); showToast.t = setTimeout(() => toast.classList.remove('show'), 2200); };
+  $('#copyMail').addEventListener('click', async e => {
+    const mail = e.currentTarget.dataset.mail;
+    try { await navigator.clipboard.writeText(mail); showToast('E-mail kopieret ✓'); }
+    catch (err) { location.href = 'mailto:' + mail; }
+  });
+
+  /* ---------- Mini-bot: "Spørg Sinan" ---------- */
+  const qa = [
+    { q: 'Hvem er du?', a: 'Jeg hedder Sinan Polat og er multimediedesigner fra Kokkedal. Jeg er ved at afslutte min professionsbachelor i Digital Konceptudvikling og har arbejdet som studentermedhjælper og praktikant i KOMBITs kommunikationsafdeling.' },
+    { q: 'Hvad søger du?', a: 'En rolle inden for UX og brugerresearch, gerne hvor komplekst indhold eller data skal gøres brugbart for rigtige mennesker. Det offentlige og B2B-tunge domæner er mit hjemmebane.' },
+    { q: 'Hvad handler dit bachelorprojekt om?', a: 'Valg.dk som dataformidlingsplatform. Jeg undersøger, hvordan borgere, journalister, analytikere og kommunale medarbejdere finder data, og designer en ny informationsstruktur med indgange efter brugergruppe. <a href="#bachelor">Se det her</a>.' },
+    { q: 'Hvilke værktøjer bruger du?', a: 'Figma til wireframes og prototyper, InDesign og Illustrator til tryk og layout, og HTML, CSS og JavaScript til web. Denne side er håndkodet.' },
+    { q: 'Hvordan kontakter jeg dig?', a: 'Skriv til <a href="mailto:sinanp2020@hotmail.com">sinanp2020@hotmail.com</a> eller ring på <a href="tel:+4550584245">5058 4245</a>. Jeg svarer hurtigt 😊' }
+  ];
+  const botBtn = $('#botBtn'), botPanel = $('#botPanel'), log = $('.bot-log'), chips = $('.bot-chips');
+  const asked = new Set();
+  const say = (html, who) => {
+    const m = document.createElement('div');
+    m.className = 'msg ' + who; m.innerHTML = html;
+    log.appendChild(m); log.scrollTop = log.scrollHeight;
+    return m;
+  };
+  const renderChips = () => {
+    chips.innerHTML = '';
+    qa.forEach((x, i) => {
+      if (asked.has(i)) return;
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = x.q;
+      b.addEventListener('click', () => ask(i)); chips.appendChild(b);
+    });
+    if (!chips.children.length) chips.innerHTML = '<span class="msg him" style="margin:0">Det var alle mine svar. Skriv endelig til mig! ✉️</span>';
+  };
+  const ask = i => {
+    asked.add(i); chips.innerHTML = '';
+    say(qa[i].q, 'me');
+    const typing = say('<span class="typing"><i></i><i></i><i></i></span>', 'him');
+    setTimeout(() => { typing.innerHTML = qa[i].a; log.scrollTop = log.scrollHeight; renderChips(); }, reduceMotion ? 0 : 700 + qa[i].a.length * 4);
+  };
+  const toggleBot = open => {
+    botPanel.hidden = !open;
+    botBtn.setAttribute('aria-expanded', open);
+    botBtn.classList.toggle('hidden', open);
+    if (open && !log.children.length) { say('Hej! 👋 Jeg er Sinans lille bot. Hvad vil du gerne vide?', 'him'); renderChips(); }
+    if (open) setTimeout(() => (chips.querySelector('button') || botPanel).focus?.(), 50);
+  };
+  botBtn.addEventListener('click', () => toggleBot(true));
+  $('.bot-x').addEventListener('click', () => { toggleBot(false); botBtn.focus(); });
+
+  /* ---------- Hilsen til nysgerrige udviklere ---------- */
+  console.log('%cHej udvikler 👋', 'font:600 20px Georgia;color:#E9532B');
+  console.log('Denne side er håndkodet af Sinan Polat i HTML, CSS og vanilla JavaScript.\nSkriv til sinanp2020@hotmail.com');
+})();

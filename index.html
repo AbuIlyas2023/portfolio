@@ -3,104 +3,405 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sinan Polat – Portfolio</title>
-<meta name="description" content="Portfolio for Sinan Polat: UX, brugerundersøgelser og kommunikationsdesign.">
+<title>Sinan Polat – UX & dataformidling</title>
+<meta name="description" content="Portfolio for Sinan Polat: multimediedesigner med fokus på UX, brugerresearch, informationsarkitektur og formidling af komplekse offentlige data.">
 <!-- Fjern næste linje, når portfolioet er klar til at blive fundet på Google, og når KOMBIT har givet lov til at vise materialerne. -->
 <meta name="robots" content="noindex">
+<meta property="og:title" content="Sinan Polat – UX & dataformidling">
+<meta property="og:description" content="Jeg gør komplekse offentlige data lette at finde og forstå.">
+<meta property="og:image" content="img/og.jpg">
+<meta name="theme-color" content="#F5F2EC">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2315171C'/><text x='50%' y='56%' text-anchor='middle' dominant-baseline='middle' font-family='Georgia' font-size='34' font-weight='700' fill='%23F5F2EC'>S</text><circle cx='48' cy='46' r='5' fill='%23E9532B'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="style.css">
+<script>
+  /* Sæt tema før siden tegnes, så den ikke blinker */
+  (function(){try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
 </head>
 <body>
+<a class="skip" href="#indhold">Spring til indhold</a>
+<div class="progress" aria-hidden="true"></div>
+
 <header class="site-header">
-  <a class="brand" href="#top">Sinan Polat</a>
-  <nav aria-label="Hovedmenu">
-    <a href="#bachelor">Bachelorprojekt</a>
-    <a href="#arbejde">Arbejde hos KOMBIT</a>
+  <a class="brand" href="#top" aria-label="Sinan Polat – til toppen">Sinan Polat<span class="dot"></span></a>
+  <nav class="nav" id="nav" aria-label="Hovedmenu">
+    <a href="#om">Om mig</a>
+    <a href="#bachelor">Bachelor</a>
+    <a href="#arbejde">Arbejde</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
+  <div class="header-tools">
+    <button class="icon-btn" id="themeToggle" type="button" aria-label="Skift mellem lyst og mørkt tema">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </div>
 </header>
 
 <main id="top">
-  <section class="hero">
-    <h1>Jeg gør komplekse offentlige data lette at finde og forstå.</h1>
-    <p class="lead">Jeg er multimediedesigner og afleverer min professionsbachelor i Digital Konceptudvikling 18. december 2026. Jeg arbejder med brugerresearch, informationsarkitektur og klar formidling. Her er mit bachelorprojekt og et udvalg af materialer fra KOMBIT.</p>
-    <p class="actions"><a class="button" href="#bachelor">Se bachelorprojektet</a> <a class="button ghost" href="#kontakt">Kontakt mig</a></p>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="indhold">
+    <canvas class="hero-field" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="status reveal"><span class="pulse"></span>Søger en rolle inden for UX &amp; brugerresearch</p>
+        <h1 class="reveal">Jeg gør komplekse <span class="rotator" aria-live="polite"><span class="rotator-word">offentlige data</span></span> lette at finde og forstå.</h1>
+        <p class="lead reveal">Hej, jeg hedder Sinan 👋 Jeg er multimediedesigner og arbejder dér, hvor <strong>brugerresearch</strong>, <strong>informationsarkitektur</strong> og <strong>visuel formidling</strong> mødes. Hos KOMBIT har jeg designet materialer til alle 98 kommuner, og 18. december 2026 afleverer jeg min professionsbachelor i Digital Konceptudvikling.</p>
+        <p class="actions reveal">
+          <a class="button magnetic" href="#arbejde">Se mit arbejde <span aria-hidden="true">→</span></a>
+          <a class="button ghost magnetic" href="#bachelor">Bachelorprojektet</a>
+        </p>
+      </div>
+      <div class="hero-visual reveal" data-parallax>
+        <div class="portrait">
+          <img src="img/sinan-portraet.jpg" alt="Portræt af Sinan Polat" width="600" height="600">
+        </div>
+        <span class="chip c1" data-depth="18">Figma</span>
+        <span class="chip c2" data-depth="-14">Brugerinterviews</span>
+        <span class="chip c3" data-depth="22">InDesign</span>
+        <span class="chip c4" data-depth="-20">Informationsarkitektur</span>
+        <svg class="scribble" viewBox="0 0 120 60" aria-hidden="true"><path d="M5 40c20-30 40-30 50-5s30 20 55-20"/><path d="M100 10l12 5-7 11"/></svg>
+      </div>
+    </div>
+    <a class="scroll-hint" href="#om" aria-label="Scroll ned"><span></span></a>
   </section>
 
-  <section id="bachelor" class="section">
-    <div class="split">
-      <div>
-        <h2>Bachelorprojekt: Valg.dk som dataformidlingsplatform</h2>
-        <p>Hvordan kan Valg.dk understøtte borgere, journalister, analytikere og kommunale medarbejdere gennem informationsarkitektur og præsentation af data? Projektet undersøger, hvor brugerne møder friktion, og udvikler en prototype af en ny informationsstruktur.</p>
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-label="Kompetencer">
+    <div class="marquee-track">
+      <span>Brugerinterviews</span><span>Usability-test</span><span>Informationsarkitektur</span><span>Design Sprint</span><span>Personas &amp; brugerrejser</span><span>Wireframes</span><span>Prototyping i Figma</span><span>Datavisualisering</span><span>InDesign</span><span>HTML · CSS · JavaScript</span><span>Umbraco</span><span>Siteimprove</span><span>Tilgængelighed</span>
+    </div>
+  </div>
+
+  <!-- ============ OM MIG ============ -->
+  <section id="om" class="section about">
+    <div class="about-photo reveal">
+      <img src="img/sinan-arbejde.jpg" alt="Sinan Polat ved sin arbejdsplads" loading="lazy" width="1600" height="1200">
+      <span class="photo-tag">På kontoret hos KOMBIT</span>
+    </div>
+    <div class="about-text">
+      <p class="eyebrow reveal">01 — Om mig</p>
+      <h2 class="reveal">Fra fagtungt indhold til noget, folk <em>faktisk</em> kan bruge.</h2>
+      <p class="reveal">Som studentermedhjælper og praktikant i KOMBITs kommunikationsafdeling har jeg arbejdet tæt på de fælleskommunale it-løsninger: FLIS, DUBU, KY og Bibliotekernes Data og It. Målgruppen er ledere, sagsbehandlere og specialister i 98 kommuner, og indholdet er ofte tungt: lovgivning, data og systemer.</p>
+      <p class="reveal">Min opgave har været at <strong>oversætte</strong>. Først forstår jeg, hvem der skal bruge materialet og hvorfor. Så strukturerer jeg indholdet, og til sidst gør jeg det visuelt. Det er den samme tankegang, jeg bruger i UX-arbejdet.</p>
+      <ul class="principles reveal">
+        <li><span>01</span>Brugeren før løsningen</li>
+        <li><span>02</span>Struktur før stil</li>
+        <li><span>03</span>Data skal kunne læses på 5 sekunder</li>
+      </ul>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><strong data-count="98">0</strong><span>kommuner som målgruppe</span></div>
+      <div class="stat reveal"><strong data-count="52">0</strong><span>sider og slides i portfolien</span></div>
+      <div class="stat reveal"><strong data-count="10">0</strong><span>projekter vist her</span></div>
+      <div class="stat reveal"><strong data-count="4">0</strong><span>faser i bachelorprojektet</span></div>
+    </div>
+  </section>
+
+  <!-- ============ BACHELOR ============ -->
+  <section id="bachelor" class="section bachelor">
+    <div class="section-head">
+      <p class="eyebrow reveal">02 — Bachelorprojekt</p>
+      <h2 class="reveal">Valg.dk som dataformidlingsplatform</h2>
+      <p class="lead small reveal">Hvordan kan Valg.dk understøtte borgere, journalister, analytikere og kommunale medarbejdere gennem informationsarkitektur og præsentation af data? Projektet undersøger, hvor brugerne møder friktion, og udvikler en prototype af en ny informationsstruktur.</p>
+    </div>
+
+    <div class="concept reveal">
+      <div class="concept-side">
         <dl class="facts">
           <div><dt>Samarbejde</dt><dd>KOMBIT</dd></div>
           <div><dt>Min rolle</dt><dd>UX research og konceptudvikling</dd></div>
+          <div><dt>Brugertest</dt><dd>11. november 2026</dd></div>
           <div><dt>Afleveres</dt><dd>18. december 2026</dd></div>
         </dl>
+        <p class="hint">Prøv konceptet: vælg en brugergruppe og se, hvordan forsiden tilpasser sig.</p>
+        <div class="persona-tabs" role="tablist" aria-label="Vælg brugergruppe">
+          <button role="tab" aria-selected="true" data-persona="borger">Borger</button>
+          <button role="tab" aria-selected="false" data-persona="journalist">Journalist</button>
+          <button role="tab" aria-selected="false" data-persona="analytiker">Analytiker</button>
+          <button role="tab" aria-selected="false" data-persona="kommune">Kommune</button>
+        </div>
       </div>
-      <div class="placeholder" role="img" aria-label="Plads til skærmbillede af prototypen">[Skærmbillede af prototypen indsættes her]</div>
+
+      <div class="browser" role="tabpanel" aria-live="polite">
+        <div class="browser-bar"><i></i><i></i><i></i><span>valg.dk/<b class="mock-path">borger</b></span></div>
+        <div class="browser-body">
+          <p class="mock-kicker">Indgang for <span class="mock-who">borgere</span></p>
+          <h3 class="mock-title">Hvem blev valgt i min kommune?</h3>
+          <div class="mock-search"><span>⌕</span><span class="mock-placeholder">Skriv din kommune eller dit postnummer</span></div>
+          <ul class="mock-tasks"></ul>
+          <div class="mock-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="mock-note">Konceptskitse med fiktive tal. Viser princippet om indgange efter brugergruppe.</p>
+        </div>
+      </div>
     </div>
-    <ol class="steps">
-      <li><h3>Discover</h3><p>Interviews og observationer med brugere af Valg.dk.</p></li>
-      <li><h3>Define</h3><p>[Indsæt det vigtigste fund og problemforståelsen]</p></li>
-      <li><h3>Develop</h3><p>Koncept for ny informationsstruktur og indgange efter brugergruppe.</p></li>
-      <li><h3>Deliver</h3><p>Prototypen testes 11. november 2026 med kommunale medarbejdere.</p></li>
-    </ol>
-    <p class="note">Teori og metode: Garrett (UX-lag), Den Dekker (design thinking), Yablonski (Laws of UX), Houde &amp; Hill (prototyper).</p>
+
+    <div class="process">
+      <div class="diamond reveal">
+        <svg viewBox="0 0 600 200" role="img" aria-label="Double Diamond-modellen med fire faser">
+          <path class="dd-shape" d="M10 100 L150 15 L290 100 L150 185 Z"/>
+          <path class="dd-shape" d="M310 100 L450 15 L590 100 L450 185 Z"/>
+          <line class="dd-split" x1="150" y1="15" x2="150" y2="185"/>
+          <line class="dd-split" x1="450" y1="15" x2="450" y2="185"/>
+          <g class="dd-zone" data-step="0" tabindex="0" role="button" aria-label="Discover"><path d="M10 100 L150 15 L150 185 Z"/><text x="100" y="106">Discover</text></g>
+          <g class="dd-zone" data-step="1" tabindex="0" role="button" aria-label="Define"><path d="M150 15 L290 100 L150 185 Z"/><text x="200" y="106">Define</text></g>
+          <g class="dd-zone" data-step="2" tabindex="0" role="button" aria-label="Develop"><path d="M310 100 L450 15 L450 185 Z"/><text x="400" y="106">Develop</text></g>
+          <g class="dd-zone" data-step="3" tabindex="0" role="button" aria-label="Deliver"><path d="M450 15 L590 100 L450 185 Z"/><text x="500" y="106">Deliver</text></g>
+        </svg>
+        <p class="dd-caption">Double Diamond · klik på en fase</p>
+      </div>
+      <div class="step-panel reveal" aria-live="polite">
+        <p class="step-num">Fase <span>1</span> / 4</p>
+        <h3 class="step-title">Discover</h3>
+        <p class="step-text"></p>
+        <ul class="tags step-tags"></ul>
+      </div>
+    </div>
+    <p class="note reveal">Teori og metode: Garrett (The Elements of User Experience), Den Dekker (design thinking), Yablonski (Laws of UX) og Houde &amp; Hill (What do prototypes prototype?).</p>
   </section>
 
-  <section class="section">
-    <h2>Det jeg arbejder med</h2>
+  <!-- ============ DATA-DEMO ============ -->
+  <section class="section data-demo">
+    <div class="data-head">
+      <p class="eyebrow reveal">03 — Dataformidling</p>
+      <h2 class="reveal">Samme tal, to formater</h2>
+      <p class="reveal">Tallene kommer fra min A1-plakat over kommuner og regioner. På plakaten blev de til farvede regioner og cirkler. Her bliver de til en interaktiv graf, for formidling handler om at vælge det format, der passer til situationen.</p>
+      <div class="toggle reveal" role="group" aria-label="Vis tal som">
+        <button type="button" class="on" data-mode="antal" aria-pressed="true">Antal borgere</button>
+        <button type="button" data-mode="andel" aria-pressed="false">Andel af Danmark</button>
+      </div>
+    </div>
+    <div class="bars reveal" id="bars"></div>
+  </section>
+
+  <!-- ============ ARBEJDE ============ -->
+  <section id="arbejde" class="section work-section">
+    <div class="section-head row">
+      <div>
+        <p class="eyebrow reveal">04 — Udvalgt arbejde</p>
+        <h2 class="reveal">Materialer fra KOMBIT</h2>
+        <p class="lead small reveal">Plakater, datablade, foldere, rapporter og præsentationer. Klik på et projekt for at bladre i alle sider eller åbne den originale PDF.</p>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Filtrer projekter">
+        <button class="on" data-filter="alle" aria-pressed="true">Alle</button>
+        <button data-filter="data" aria-pressed="false">Data</button>
+        <button data-filter="tryk" aria-pressed="false">Tryk</button>
+        <button data-filter="event" aria-pressed="false">Event</button>
+        <button data-filter="praes" aria-pressed="false">Præsentation</button>
+        <button data-filter="grafik" aria-pressed="false">Grafik</button>
+      </div>
+    </div>
+
+    <div class="work" id="work">
+      <article class="card" data-cat="data tryk" data-slug="danmarkskort-a1" data-pages="1" data-pdf="pdf/danmarkskort-a1.pdf">
+        <button class="card-media" type="button" aria-label="Åbn Kommuner og regioner i Danmark">
+          <img src="work/danmarkskort-a1/thumb.jpg" alt="A1-plakat med kort over Danmarks kommuner og regioner" loading="lazy">
+          <span class="badge">A1 · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>Kommuner og regioner i Danmark</h3>
+          <p>A1-plakat med alle 98 kommuner, fem farvekodede regioner og en infografik med antal borgere pr. region.</p>
+          <p class="role"><b>Min rolle:</b> Layout, datavisualisering og farvekodning. Fokus på læsbarhed på afstand og klargøring til storformatstryk.</p>
+          <ul class="tags"><li>Datavisualisering</li><li>Storformat</li><li>Farvesystem</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="data tryk" data-slug="flis-datablade" data-pages="5" data-pdf="pdf/flis-datablade.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn FLIS datablade">
+          <img src="work/flis-datablade/thumb.jpg" alt="FLIS borgerdata – første side af en serie på fem datablade" loading="lazy">
+          <span class="badge">5 sider · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>FLIS datablade</h3>
+          <p>Serie på fem datablade om borgerdata, KY-data, skoledata, YR-data og økonomidata. Alle følger samme struktur: spørgsmål, så kort sagt, så gevinster.</p>
+          <p class="role"><b>Min rolle:</b> Skabelon og grid til hele serien, informationshierarki, ikonografi og ensartet opsætning. En lille designsystem-tankegang på papir.</p>
+          <ul class="tags"><li>Skabelon</li><li>Ikonografi</li><li>Konsistens</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="data tryk" data-slug="flis-produktblade" data-pages="3" data-pdf="pdf/flis-produktblade.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn FLIS produktblade">
+          <img src="work/flis-produktblade/thumb.jpg" alt="Produktblad for Automatiseret Ledelsestilsyn" loading="lazy">
+          <span class="badge">3 sider · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>Produktblade: Ledelsestilsyn, Momskontrol og SDE</h3>
+          <p>Tre produktblade, der stiller udfordringen i dag over for løsningen og gevinsterne for kommunen.</p>
+          <p class="role"><b>Min rolle:</b> Visuel fortælling fra problem til løsning til gevinst, farvekode pr. produkt, tydelige call-to-actions og kontaktmodul.</p>
+          <ul class="tags"><li>Storytelling</li><li>Produktkommunikation</li></ul>
+        </div>
+      </article>
+      <article class="card wide" data-cat="praes" data-slug="kombit-iceland" data-pages="25" data-pdf="pdf/kombit-iceland.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn præsentationen The digital journey of the 98 Danish municipalities">
+          <img src="work/kombit-iceland/thumb.jpg" alt="Forsideslide: The digital journey of the 98 Danish municipalities" loading="lazy">
+          <span class="badge">25 slides · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>The digital journey of the 98 Danish municipalities</h3>
+          <p>Præsentation til en islandsk konference 25. marts 2026 om KOMBIT, den fælleskommunale it-model, cyber og AI.</p>
+          <p class="role"><b>Min rolle:</b> Slide-design og struktur i seks kapitler, nøgletal, tidslinjer, ikoner og diagrammer, der gør en kompleks offentlig model forståelig for et internationalt publikum.</p>
+          <ul class="tags"><li>Præsentation</li><li>Diagrammer</li><li>Engelsk</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="tryk" data-slug="ai-politik" data-pages="12" data-pdf="pdf/ai-politik.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn Politik for anvendelse af AI">
+          <img src="work/ai-politik/thumb.jpg" alt="Forside til KOMBITs Politik for anvendelse af AI 2025–2026" loading="lazy">
+          <span class="badge">12 sider · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>Politik for anvendelse af AI</h3>
+          <p>KOMBITs AI-politik 2025–2026 med 15 principper samlet i en tilgængelig rapport.</p>
+          <p class="role"><b>Min rolle:</b> Rapportlayout i InDesign med forside, indholdsfortegnelse, typografisk hierarki og billedvalg, så et tungt policydokument bliver let at navigere i.</p>
+          <ul class="tags"><li>Rapport</li><li>Typografi</li><li>Navigation</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="event tryk" data-slug="dubu-program" data-pages="2" data-pdf="pdf/dubu-program.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn DUBU program">
+          <img src="work/dubu-program/thumb.jpg" alt="Program for DUBU ledernetværksmøde med stregillustrationer" loading="lazy">
+          <span class="badge">2 sider · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>DUBU ledernetværksmøde: program</h3>
+          <p>Dagsprogram, hvor stregillustrationer guider læseren gennem dagen, fra check-in over caféer til datadrevet ledelse.</p>
+          <p class="role"><b>Min rolle:</b> Layout og tidslinjestruktur for dagsprogrammet samt integration af illustrationerne i et samlet udtryk.</p>
+          <ul class="tags"><li>Event</li><li>Illustration</li><li>Wayfinding</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="event" data-slug="dubu-noteark" data-pages="2" data-pdf="pdf/dubu-noteark.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn DUBU noteark">
+          <img src="work/dubu-noteark/thumb.jpg" alt="Noteark med fem nøglekompetencer og plads til action points" loading="lazy">
+          <span class="badge">2 sider · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>DUBU ledernetværksmøde: noteark</h3>
+          <p>Noteark med fem nøglekompetencer for digital ledelse (Røhl &amp; Crompvoets, 2024) og plads til egne action points.</p>
+          <p class="role"><b>Min rolle:</b> Layout, der understøtter facilitering, så deltagerne går fra passive tilhørere til aktive deltagere.</p>
+          <ul class="tags"><li>Facilitering</li><li>Event</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="grafik" data-slug="digitalt-perspektiv" data-pages="1">
+        <button class="card-media" type="button" aria-label="Åbn Digitalt Perspektiv">
+          <img src="work/digitalt-perspektiv/thumb.jpg" alt="Rød grafik med teksten Digitalt Perspektiv i isometrisk perspektiv" loading="lazy">
+          <span class="badge">Grafik</span>
+        </button>
+        <div class="card-body">
+          <h3>Digitalt Perspektiv</h3>
+          <p>Typografisk cover-grafik i isometrisk perspektiv med slagskygge og en lille figur, der giver skala og retning.</p>
+          <p class="role"><b>Min rolle:</b> Grafisk koncept og illustration, hvor ordet "perspektiv" bliver bogstaveligt.</p>
+          <ul class="tags"><li>Typografi</li><li>Illustration</li></ul>
+        </div>
+      </article>
+      <article class="card wide" data-cat="tryk" data-slug="bdi-produktstrategi" data-pages="2" data-pdf="pdf/bdi-produktstrategi.pdf">
+        <button class="card-media stack" type="button" aria-label="Åbn Produktstrategi for Bibliotekernes Data og It">
+          <img src="work/bdi-produktstrategi/thumb.jpg" alt="3-fløjet folder om produktstrategi for Bibliotekernes Data og It" loading="lazy">
+          <span class="badge">Folder · PDF</span>
+        </button>
+        <div class="card-body">
+          <h3>Produktstrategi for Bibliotekernes Data og It</h3>
+          <p>3-fløjet A5-folder i tværformat med rullefals. Indeholder en model over strategien, mission og vision og en QR-kode til hele produktstrategien.</p>
+          <p class="role"><b>Min rolle:</b> Falsning og læserækkefølge, visualisering af strategimodellen, mission/vision-diagram og trykklargøring.</p>
+          <ul class="tags"><li>Folder</li><li>Informationsdesign</li><li>Tryk</li></ul>
+        </div>
+      </article>
+      <article class="card" data-cat="grafik" data-slug="ky-aibot" data-pages="1" data-svg="img/ky-aibot.svg">
+        <button class="card-media logo-media" type="button" aria-label="Åbn logo for KY AI-bot">
+          <img src="img/ky-aibot.svg" alt="Logo for KY AI-bot: en venlig robot og bogstaverne KY" loading="lazy">
+          <span class="badge">Logo · SVG</span>
+        </button>
+        <div class="card-body">
+          <h3>KY AI-bot</h3>
+          <p>Logo og ikon til en AI-assistent for Kommunernes Ydelsessystem: en venlig robotkarakter sammen med KY-ordmærket.</p>
+          <p class="role"><b>Min rolle:</b> Ikon- og logodesign i vektor. Det virker både som lille avatar i en chat og som fuldt logo.</p>
+          <ul class="tags"><li>Logo</li><li>Ikon</li><li>AI</li></ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ KOMPETENCER ============ -->
+  <section class="section skills-section">
+    <p class="eyebrow reveal">05 — Værktøjskassen</p>
+    <h2 class="reveal">Det jeg arbejder med</h2>
     <div class="skills">
-      <div><h3>Research og test</h3><p>Brugerinterviews, observationer, usability-tests, personas, brugerrejser og Design Sprint.</p></div>
-      <div><h3>Design og prototyping</h3><p>Figma (wireframes, mockups og prototyper), informationsarkitektur, InDesign, Photoshop og Premiere Pro.</p></div>
-      <div><h3>Web og data</h3><p>HTML, CSS og JavaScript samt Siteimprove, GoPublic og Umbraco.</p></div>
-    </div>
-  </section>
-
-  <section id="arbejde" class="section">
-    <h2>Arbejde hos KOMBIT</h2>
-    <p class="lead small">Plakater, produktblade og foldere fra min tid som studentermedhjælper og praktikant i kommunikationsafdelingen.</p>
-    <div class="work">
-      <figure>
-        <img src="img/kort.jpg" alt="Plakat med kort over Danmarks kommuner og regioner" loading="lazy">
-        <figcaption><strong>Kort over kommuner og regioner</strong>A1-plakat med antal borgere pr. region. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
-      <figure class="double">
-        <div><img src="img/flis-borger.jpg" alt="FLIS borgerdata" loading="lazy"><img src="img/flis-skole.jpg" alt="FLIS skoledata" loading="lazy"></div>
-        <figcaption><strong>FLIS datablade</strong>Serie på fem datablade med ens opbygning: spørgsmål, kort sagt og gevinster. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
-      <figure>
-        <img src="img/ledelsestilsyn.jpg" alt="Produktblad for Automatiseret Ledelsestilsyn" loading="lazy">
-        <figcaption><strong>Automatiseret Ledelsestilsyn</strong>Produktblad, der stiller udfordringen i dag over for løsningen. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
-      <figure>
-        <img src="img/momskontrol.jpg" alt="Produktblad for FLIS Momskontrol" loading="lazy">
-        <figcaption><strong>FLIS Momskontrol</strong>Produktblad om datavalidering af momsrefusion. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
-      <figure>
-        <img src="img/dubu.jpg" alt="Program for DUBU ledernetværksmøde" loading="lazy">
-        <figcaption><strong>DUBU ledernetværksmøde</strong>Programfolder med dagsprogram og caféer. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
-      <figure>
-        <img src="img/bibliotek.jpg" alt="Forside til folderen Bibliotekernes Data og It" loading="lazy">
-        <figcaption><strong>Bibliotekernes Data &amp; It</strong>Folder med forside, organisationsdiagram og mission og vision. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
-      <figure class="wide">
-        <img src="img/ydelsesdag.jpg" alt="Program for Kommunernes Ydelsesdag 2026" loading="lazy">
-        <figcaption><strong>Kommunernes Ydelsesdag 2026</strong>3-fløjet A5-folder med dagsprogram, oversigt over stande og feedback via QR-kode. <span class="role">Min rolle: [UDFYLD]</span></figcaption>
-      </figure>
+      <div class="skill reveal">
+        <span class="skill-ico" aria-hidden="true">◎</span>
+        <h3>Research og test</h3>
+        <p>Semistrukturerede interviews, observationer, usability-tests (tænke højt), personas, brugerrejser, affinity-diagrammer og Design Sprint.</p>
+      </div>
+      <div class="skill reveal">
+        <span class="skill-ico" aria-hidden="true">◇</span>
+        <h3>Design og prototyping</h3>
+        <p>Figma (wireframes, mockups og klikbare prototyper), informationsarkitektur, sitemaps, InDesign, Illustrator, Photoshop og Premiere Pro.</p>
+      </div>
+      <div class="skill reveal">
+        <span class="skill-ico" aria-hidden="true">&lt;/&gt;</span>
+        <h3>Web og data</h3>
+        <p>HTML, CSS og JavaScript (denne side er håndkodet), Umbraco, GoPublic, Siteimprove og webtilgængelighed (WCAG).</p>
+      </div>
     </div>
   </section>
 </main>
 
+<!-- ============ KONTAKT ============ -->
 <footer id="kontakt" class="contact">
-  <h2>Lad os tale sammen</h2>
-  <p>Jeg søger en rolle inden for UX og brugerundersøgelser. Fuldt CV og flere eksempler sendes gerne.</p>
-  <p><a href="tel:+4550584245">5058 4245</a> &nbsp; <a href="mailto:sinanp2020@hotmail.com">sinanp2020@hotmail.com</a> &nbsp; Kokkedal</p>
-  <p class="fine">Materialerne er produceret hos KOMBIT. [Bekræft tilladelse til at vise dem, og tilføj link til LinkedIn.]</p>
+  <div class="contact-inner">
+    <p class="eyebrow">06 — Kontakt</p>
+    <h2 class="big">Lad os gøre noget <em>komplekst</em> enkelt.</h2>
+    <p>Jeg søger en rolle inden for UX og brugerresearch. Fuldt CV og flere eksempler sender jeg gerne.</p>
+    <div class="contact-actions">
+      <button class="button light magnetic" type="button" id="copyMail" data-mail="sinanp2020@hotmail.com">
+        <span class="copy-label">sinanp2020@hotmail.com</span><span class="copy-ico" aria-hidden="true">⧉</span>
+      </button>
+      <a class="button ghost-light magnetic" href="tel:+4550584245">5058 4245</a>
+      <!-- Indsæt din LinkedIn-adresse her: -->
+      <a class="button ghost-light magnetic" href="https://www.linkedin.com/in/DIT-BRUGERNAVN" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <p class="fine">Kokkedal · Materialerne er produceret hos KOMBIT og vises med tilladelse. · Siden er håndkodet i HTML, CSS og JavaScript.</p>
+  </div>
 </footer>
+
+<!-- ============ VIEWER (PDF-galleri) ============ -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle" hidden>
+  <div class="viewer-top">
+    <div>
+      <p class="viewer-title" id="viewerTitle"></p>
+      <p class="viewer-count"></p>
+    </div>
+    <div class="viewer-actions">
+      <a class="vbtn" id="viewerOpen" target="_blank" rel="noopener">Åbn PDF ↗</a>
+      <a class="vbtn" id="viewerDownload" download>Download</a>
+      <button class="vbtn close" type="button" id="viewerClose" aria-label="Luk">✕</button>
+    </div>
+  </div>
+  <div class="viewer-stage">
+    <button class="vnav prev" type="button" aria-label="Forrige side">‹</button>
+    <img class="viewer-img" alt="">
+    <button class="vnav next" type="button" aria-label="Næste side">›</button>
+  </div>
+  <div class="viewer-thumbs"></div>
+</div>
+
+<!-- ============ MINI-BOT ============ -->
+<div class="bot" id="bot">
+  <div class="bot-panel" id="botPanel" hidden>
+    <div class="bot-head">
+      <img src="img/sinan-portraet.jpg" alt="" width="36" height="36">
+      <div><b>Spørg Sinan</b><span>svarer som regel med det samme</span></div>
+      <button type="button" class="bot-x" aria-label="Luk chat">✕</button>
+    </div>
+    <div class="bot-log" aria-live="polite"></div>
+    <div class="bot-chips"></div>
+  </div>
+  <button class="bot-btn" id="botBtn" type="button" aria-expanded="false" aria-controls="botPanel">
+    <img src="img/sinan-portraet.jpg" alt="" width="44" height="44"><span>Spørg mig</span>
+  </button>
+</div>
+
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
 </body>
 </html>

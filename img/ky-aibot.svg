@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Lag_2" data-name="Lag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.81 51.53">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 3.09px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke: #3373d2;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-6, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        stroke-width: 3px;
+      }
+
+      .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-7, .cls-4 {
+        fill: #3373d2;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Lag_1-2" data-name="Lag 1">
+    <g>
+      <ellipse class="cls-4" cx="5.36" cy="31.9" rx="4.36" ry="5.85"/>
+      <ellipse class="cls-4" cx="54.48" cy="31.9" rx="4.36" ry="5.85"/>
+      <rect class="cls-1" x="5.61" y="14.74" width="48.61" height="35.24" rx="13.24" ry="13.24"/>
+      <circle class="cls-5" cx="29.92" cy="5.64" r="4.64"/>
+      <line class="cls-2" x1="29.92" y1="14.7" x2="29.92" y2="10.04"/>
+      <circle class="cls-4" cx="20.4" cy="28.78" r="2.73"/>
+      <circle class="cls-4" cx="39.3" cy="29.2" r="2.73"/>
+      <path class="cls-3" d="M40.72,37c-5.97,5.97-15.64,5.97-21.61,0"/>
+      <path class="cls-6" d="M19.15,27.22c.1.72.23,1.01.27,1.56-.05.55-.18.84-.27,1.56,0,0-.08.08-.08.08-.44-.41-.72-1.01-.73-1.64.02-.62.29-1.22.73-1.64l.08.08h0Z"/>
+      <path class="cls-6" d="M38.07,27.65c.1.72.23,1.01.27,1.56-.05.55-.18.84-.27,1.56,0,0-.08.08-.08.08-.44-.41-.72-1.01-.73-1.64.02-.62.29-1.22.73-1.64l.08.08h0Z"/>
+      <path class="cls-7" d="M65.95,43.21v-22.54h6.12v9.12h.31l6.78-9.12h7.13l-7.62,10.04,7.79,12.51h-7.31l-5.06-8.45-2.03,2.64v5.81h-6.12Z"/>
+      <path class="cls-7" d="M87.18,20.67h6.83l4.4,9.16h.18l4.4-9.16h6.83l-8.28,15.46v7.09h-6.08v-7.09l-8.28-15.46Z"/>
+    </g>
+  </g>
+</svg>

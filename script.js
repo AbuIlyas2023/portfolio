@@ -273,14 +273,26 @@
 
   /* ---------- Galleri: filtre ---------- */
   const cards = $$('.card');
+  // Når man skifter filter, vises de projekter, der er NYE i forhold til forrige filter, først.
+  // Så kan man tydeligt se, at der er kommet andre ting frem.
+  const workCards = $$('#work .card');
+  let visibleBefore = new Set(workCards);
   $$('.filters button').forEach(btn => btn.addEventListener('click', () => {
     const f = btn.dataset.filter;
     $$('.filters button').forEach(b => { b.classList.toggle('on', b === btn); b.setAttribute('aria-pressed', b === btn); });
-    $$('#work .card').forEach(c => {
+    const nowVisible = new Set();
+    workCards.forEach((c, i) => {
       const show = f === 'alle' || c.dataset.cat.split(' ').includes(f);
       c.classList.toggle('hide', !show);
-      if (show) { c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); }
+      if (!show) return;
+      nowVisible.add(c);
+      const isNew = !visibleBefore.has(c);
+      // "Alle" bruger den oprindelige rækkefølge; andre filtre sætter nye projekter øverst
+      c.style.order = f === 'alle' ? '' : (isNew ? i - (c.classList.contains('wide') ? 2000 : 1000) : i);
+      c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop');
+      c.style.animationDelay = (isNew && f !== 'alle') ? '0s' : '.08s';
     });
+    visibleBefore = nowVisible;
   }));
 
   /* ---------- Galleri: lys der følger musen + 3D-tilt ---------- */

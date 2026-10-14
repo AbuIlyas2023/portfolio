@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 <script>
   /* Sæt tema før siden tegnes, så den ikke blinker */
   (function(){try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
@@ -31,10 +31,11 @@
     <a href="#om">Om mig</a>
     <a href="#bachelor">Bachelor</a>
     <a href="#arbejde">Arbejde</a>
+    <a href="#uddannelse">Uddannelse</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
   <div class="header-tools">
-    <a class="cv-link" href="pdf/CV-Sinan-Polat.pdf" download="CV-Sinan-Polat.pdf">Download CV <span aria-hidden="true">↓</span></a>
+    <a class="cv-link" href="pdf/CV-Sinan-Polat.pdf" download="CV-Sinan-Polat.pdf"><span class="long">Download </span>CV <span aria-hidden="true">↓</span></a>
     <button class="icon-btn" id="themeToggle" type="button" aria-label="Skift mellem lyst og mørkt tema">
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -99,8 +100,8 @@
     </div>
     <div class="stats">
       <div class="stat reveal"><strong data-count="98">0</strong><span>kommuner som målgruppe</span></div>
-      <div class="stat reveal"><strong data-count="52">0</strong><span>sider og slides i portfolien</span></div>
-      <div class="stat reveal"><strong data-count="10">0</strong><span>projekter vist her</span></div>
+      <div class="stat reveal"><strong data-count="113">0</strong><span>sider, slides og skærme i portfolien</span></div>
+      <div class="stat reveal"><strong data-count="14">0</strong><span>projekter vist her</span></div>
       <div class="stat reveal"><strong data-count="4">0</strong><span>faser i bachelorprojektet</span></div>
     </div>
   </section>
@@ -187,10 +188,11 @@
       <div>
         <p class="eyebrow reveal">04 — Udvalgt arbejde</p>
         <h2 class="reveal">Materialer fra KOMBIT</h2>
-        <p class="lead small reveal">Plakater, datablade, foldere, rapporter og præsentationer. Klik på et projekt for at bladre i alle sider eller åbne den originale PDF.</p>
+        <p class="lead small reveal">En interaktiv prototype samt plakater, datablade, foldere, rapporter og præsentationer. Klik på et projekt for at bladre i alle sider eller åbne den originale PDF.</p>
       </div>
       <div class="filters reveal" role="group" aria-label="Filtrer projekter">
         <button class="on" data-filter="alle" aria-pressed="true">Alle</button>
+        <button data-filter="ux" aria-pressed="false">UX</button>
         <button data-filter="data" aria-pressed="false">Data</button>
         <button data-filter="tryk" aria-pressed="false">Tryk</button>
         <button data-filter="event" aria-pressed="false">Event</button>
@@ -200,6 +202,29 @@
     </div>
 
     <div class="work" id="work">
+      <article class="card feature" data-cat="ux data" data-slug="feedback-prototype" data-pages="13" data-link="https://side-reduce-35089351.figma.site/" data-link-label="Prøv prototypen ↗">
+        <button class="card-media browser-media" type="button" aria-label="Se skærmbilleder af Feedback Flow-prototypen">
+          <span class="mini-bar"><i></i><i></i><i></i><span>Feedback Flow Prototype</span></span>
+          <img src="work/feedback-prototype/thumb.jpg" alt="Internt dashboard med tematiseret brugerfeedback og prioriteringsscore" loading="lazy">
+          <span class="badge">Figma · 13 skærme</span>
+        </button>
+        <div class="card-body">
+          <p class="kicker">UX-case · Praktik hos KOMBIT · Selvstændigt initiativ</p>
+          <h3>Feedback Flow: fra spredte henvendelser til prioriteret indsigt</h3>
+          <p>I praktikken så jeg, at brugerfeedback til KOMBITs løsninger ofte blev samlet i Excel-ark og spredt over mails og andre kanaler. Uden et samlet system var det svært for borgerne at give feedback og for medarbejderne at få overblik.</p>
+          <p>Derfor byggede jeg på eget initiativ en interaktiv Figma-prototype med to sammenkoblede visninger:</p>
+          <ul class="checks">
+            <li><b>Borgervendt flow:</b> brugeren guides gennem et struktureret spørgeforløb og ser først, om problemet allerede er meldt, så input samles i temaer i stedet for enkeltsager.</li>
+            <li><b>Internt dashboard:</b> feedback tematiseres og sorteres efter en prioriteringsscore baseret på antal brugere, kritikalitet og udvikling over tid.</li>
+          </ul>
+          <p class="role"><b>Min rolle:</b> Problemafdækning, brugerflow, informationsarkitektur og UI-design i Figma. Prototypen supplerede mit arbejde med prioriteringsmetoden WSJF og konceptet Brugerfokus ved at gøre en abstrakt idé konkret og skabe dialog. Teori: Garrett (strategy og surface) og Houde &amp; Hill.</p>
+          <p class="card-actions">
+            <a class="button small" href="https://side-reduce-35089351.figma.site/" target="_blank" rel="noopener">Prøv prototypen ↗</a>
+            <button class="button ghost small" type="button" data-open-card>Se skærmbilleder</button>
+          </p>
+          <ul class="tags"><li>Figma</li><li>Brugerflow</li><li>Dashboard</li><li>Prioritering</li><li>Nudging</li></ul>
+        </div>
+      </article>
       <article class="card" data-cat="data tryk" data-slug="danmarkskort-a1" data-pages="1" data-pdf="pdf/danmarkskort-a1.pdf">
         <button class="card-media" type="button" aria-label="Åbn Kommuner og regioner i Danmark">
           <img src="work/danmarkskort-a1/thumb.jpg" alt="A1-plakat med kort over Danmarks kommuner og regioner" loading="lazy">
@@ -323,20 +348,85 @@
     </div>
   </section>
 
+  <!-- ============ UDDANNELSE ============ -->
+  <section id="uddannelse" class="section edu">
+    <div class="section-head">
+      <p class="eyebrow reveal">05 — Uddannelse</p>
+      <h2 class="reveal">Skole, praktik og det faglige fundament</h2>
+      <p class="lead small reveal">Uddannelsen har givet mig metoderne. Opgaverne her viser, hvordan jeg bruger dem: adfærdsdesign, forretningsforståelse og brugerinddragelse.</p>
+    </div>
+    <div class="edu-grid">
+      <ol class="timeline reveal">
+        <li class="now"><span class="when">2025 – dec. 2026</span><b>Professionsbachelor i Digital Konceptudvikling</b><span>Zealand · Brugerresearch og test, Design Sprint, forretningsforståelse og prototyping i Figma.</span></li>
+        <li><span class="when">Jan.–mar. 2025 · jul.–okt. 2026</span><b>Praktik i KOMBIT</b><span>Kommunikation, brugerinddragelse, feedbackprocesser og prioritering.</span></li>
+        <li><span class="when">Færdig juni 2025</span><b>Erhvervsakademiuddannelse i Multimediedesign</b><span>CPH Business · Digital design og UX, front-end og indholdsproduktion. Hovedopgave skrevet i samarbejde med KOMBIT.</span></li>
+        <li><span class="when">2021 – 2023</span><b>Uddannelsesvidenskab</b><span>Aarhus Universitet · Ikke afsluttet. Uddannelsesdata, pædagogik og læringsteori.</span></li>
+        <li><span class="when">2017 – 2020</span><b>STX</b><span>Rungsted Gymnasium · Samfundsfag A og matematik B.</span></li>
+      </ol>
+      <div class="school">
+        <article class="card school-card" data-slug="synopsis-nudging" data-pages="15" data-pdf="pdf/synopsis-nudging-fremlaeggelse.pdf">
+          <button class="card-media" type="button" aria-label="Åbn synopsisfremlæggelsen om nudging">
+            <img src="work/synopsis-nudging/thumb.jpg" alt="Forsideslide: Fra surprise-bag til handling" loading="lazy">
+            <span class="badge">15 slides · PDF</span>
+            <span class="grade">Karakter <b>10</b></span>
+          </button>
+          <div class="card-body">
+            <p class="kicker">2. semester · Synopsis og fremlæggelse</p>
+            <h3>Fra surprise-bag til handling</h3>
+            <p>Hvordan kan Too Good To Go bruge nudging efter købet til at reducere friktionen mellem den modtagne overskudsmad og brugerens faktiske brug af den, uden at ændre surprise-bag-modellen?</p>
+            <p class="role"><b>Indsigt:</b> Problemet er ikke nødvendigvis viden, men overgangen fra intention til handling. Forslaget er tre diskrete nudges: opskrift, timing og feedback, placeret tæt på brugerens beslutningsøjeblik og altid lette at fravælge.</p>
+            <ul class="tags"><li>Nudging</li><li>Thaler &amp; Sunstein</li><li>Kahneman</li><li>Münster</li><li>Etik</li></ul>
+            <p class="more"><a href="pdf/opgaveportfolio-2-semester.pdf" target="_blank" rel="noopener">Læs hele opgaven (PDF) ↗</a></p>
+          </div>
+        </article>
+        <article class="card school-card" data-slug="opgaveportfolio" data-pages="14" data-pdf="pdf/opgaveportfolio-2-semester.pdf">
+          <button class="card-media" type="button" aria-label="Åbn opgaveportfolio for 2. semester">
+            <img src="work/opgaveportfolio/thumb.jpg" alt="Forside til opgaveportfolio og synopsis, 2. semester" loading="lazy">
+            <span class="badge">14 sider · PDF</span>
+          </button>
+          <div class="card-body">
+            <p class="kicker">2. semester · Opgaveportfolio</p>
+            <h3>Fire projekter, fire metoder</h3>
+            <ul class="mini-list">
+              <li><b>Too Good To Go:</b> Business Model Canvas, Blue Ocean og innovation. Mit bidrag var den strategiske analyse.</li>
+              <li><b>Digital Data Tools:</b> SEO, video, Power BI og dataindsamling med Micro:bit.</li>
+              <li><b>Behavioural Design:</b> Hooked-modellen på TikTok, gamification og etisk nudging.</li>
+              <li><b>Afstand i Rigsfællesskabet:</b> participatory design med visuelle boards.</li>
+            </ul>
+            <ul class="tags"><li>BMC</li><li>Power BI</li><li>Hooked</li><li>Participatory design</li></ul>
+          </div>
+        </article>
+        <article class="card school-card" data-slug="praktikrapport" data-pages="26" data-pdf="pdf/praktikrapport-kombit-2026.pdf">
+          <button class="card-media" type="button" aria-label="Åbn praktikrapport 2026">
+            <img src="work/praktikrapport/thumb.jpg" alt="Forside til Praktikrapport 2026" loading="lazy">
+            <span class="badge">26 sider · PDF</span>
+          </button>
+          <div class="card-body">
+            <p class="kicker">3. semester · 10 ugers praktik i KOMBIT</p>
+            <h3>Praktikrapport 2026</h3>
+            <p>Om at være juniorressource i en kompleks offentlig organisation: en WSJF-præsentation til prioritering i workshops med produktejere, en A4-skabelon til brugerevents i konceptet Brugerfokus og Feedback Flow-prototypen.</p>
+            <p class="role"><b>Læring:</b> Teoretiske modeller kan sjældent bruges ukritisk. I en organisation med 98 kommuner som ejere fungerede WSJF bedst som et værktøj til dialog og fælles forståelse.</p>
+            <ul class="tags"><li>WSJF</li><li>Brugerfokus</li><li>Garrett</li><li>Houde &amp; Hill</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ KOMPETENCER ============ -->
   <section class="section skills-section">
-    <p class="eyebrow reveal">05 — Værktøjskassen</p>
+    <p class="eyebrow reveal">06 — Værktøjskassen</p>
     <h2 class="reveal">Det jeg arbejder med</h2>
     <div class="skills">
       <div class="skill reveal">
         <span class="skill-ico" aria-hidden="true">◎</span>
         <h3>Research og test</h3>
-        <p>Semistrukturerede interviews, observationer, usability-tests (tænke højt), personas, brugerrejser, affinity-diagrammer og Design Sprint.</p>
+        <p>Semistrukturerede interviews, observationer, usability-tests (tænke højt), personas, brugerrejser, affinity-diagrammer, participatory design, Design Sprint og prioritering med WSJF.</p>
       </div>
       <div class="skill reveal">
         <span class="skill-ico" aria-hidden="true">◇</span>
         <h3>Design og prototyping</h3>
-        <p>Figma (wireframes, mockups og klikbare prototyper), informationsarkitektur, sitemaps, InDesign, Illustrator, Photoshop og Premiere Pro.</p>
+        <p>Figma (wireframes, mockups, klikbare prototyper og dashboards), informationsarkitektur, brugerflows, sitemaps, InDesign, Illustrator, Photoshop og Premiere Pro.</p>
       </div>
       <div class="skill reveal">
         <span class="skill-ico" aria-hidden="true">&lt;/&gt;</span>
@@ -350,7 +440,7 @@
 <!-- ============ KONTAKT ============ -->
 <footer id="kontakt" class="contact">
   <div class="contact-inner">
-    <p class="eyebrow">06 — Kontakt</p>
+    <p class="eyebrow">07 — Kontakt</p>
     <h2 class="big">Lad os gøre noget <em>komplekst</em> enkelt.</h2>
     <p>Jeg søger en rolle inden for UX og brugerresearch. Hent mit CV, eller skriv direkte til mig.</p>
     <div class="contact-actions">
@@ -404,6 +494,6 @@
 </div>
 
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="script.js?v=2" defer></script>
+<script src="script.js?v=4" defer></script>
 </body>
 </html>

@@ -276,7 +276,7 @@
   $$('.filters button').forEach(btn => btn.addEventListener('click', () => {
     const f = btn.dataset.filter;
     $$('.filters button').forEach(b => { b.classList.toggle('on', b === btn); b.setAttribute('aria-pressed', b === btn); });
-    cards.forEach(c => {
+    $$('#work .card').forEach(c => {
       const show = f === 'alle' || c.dataset.cat.split(' ').includes(f);
       c.classList.toggle('hide', !show);
       if (show) { c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); }
@@ -327,6 +327,8 @@
     vOpen.href = file; vDown.href = file;
     vDown.setAttribute('download', file.split('/').pop());
     vOpen.textContent = pdf ? 'Åbn PDF ↗' : 'Åbn original ↗';
+    vDown.hidden = false;
+    if (card.dataset.link) { vOpen.href = card.dataset.link; vOpen.textContent = card.dataset.linkLabel || 'Åbn ↗'; vDown.hidden = true; }
     vThumbs.innerHTML = vPages.length > 1 ? vPages.map((p, i) => `<button type="button" aria-label="Gå til side ${i + 1}"><img src="${p}" alt="" loading="lazy"></button>`).join('') : '';
     $$('button', vThumbs).forEach((b, i) => b.addEventListener('click', () => showPage(i)));
     $$('.vnav', viewer).forEach(b => b.hidden = vPages.length < 2);
@@ -342,6 +344,7 @@
     if (lastFocus) lastFocus.focus();
   };
   cards.forEach(c => $('.card-media', c).addEventListener('click', () => openViewer(c)));
+  $$('[data-open-card]').forEach(b => b.addEventListener('click', () => openViewer(b.closest('.card'))));
   $$('[data-viewer]').forEach(b => b.addEventListener('click', () => openViewer(b)));
   $('#viewerClose').addEventListener('click', closeViewer);
   $('.vnav.prev').addEventListener('click', () => showPage(vIdx - 1));
@@ -382,6 +385,7 @@
     { q: 'Hvem er du?', a: 'Jeg hedder Sinan Polat og er multimediedesigner fra Kokkedal. Jeg er ved at afslutte min professionsbachelor i Digital Konceptudvikling og har arbejdet som studentermedhjælper og praktikant i KOMBITs kommunikationsafdeling.' },
     { q: 'Hvad søger du?', a: 'En rolle inden for UX og brugerresearch, gerne hvor komplekst indhold eller data skal gøres brugbart for rigtige mennesker. Det offentlige og B2B-tunge domæner er mit hjemmebane.' },
     { q: 'Hvad handler dit bachelorprojekt om?', a: 'Valg.dk som dataformidlingsplatform. Jeg undersøger, hvordan borgere, journalister, analytikere og kommunale medarbejdere finder data, og designer en ny informationsstruktur med indgange efter brugergruppe. <a href="#bachelor">Se det her</a>.' },
+    { q: 'Hvad lavede du i praktikken?', a: 'Jeg lavede en WSJF-præsentation, der blev brugt i workshops med produktejere, en skabelon til brugerevents i konceptet Brugerfokus og på eget initiativ en Figma-prototype til indsamling og prioritering af brugerfeedback. <a href="#arbejde">Se prototypen her</a>.' },
     { q: 'Hvilke værktøjer bruger du?', a: 'Figma til wireframes og prototyper, InDesign og Illustrator til tryk og layout, og HTML, CSS og JavaScript til web. Denne side er håndkodet.' },
     { q: 'Kan jeg se dit CV?', a: 'Selvfølgelig! <a href="pdf/CV-Sinan-Polat.pdf" target="_blank" rel="noopener">Åbn mit CV her</a> eller <a href="pdf/CV-Sinan-Polat.pdf" download="CV-Sinan-Polat.pdf">download det som PDF</a>.' },
     { q: 'Hvordan kontakter jeg dig?', a: 'Skriv til <a href="mailto:sinanp2020@hotmail.com">sinanp2020@hotmail.com</a> eller ring på <a href="tel:+4550584245">5058 4245</a>. Jeg svarer hurtigt 😊' }

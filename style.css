@@ -401,3 +401,6 @@ p{margin:0 0 1em;max-width:66ch}
 .brand{white-space:nowrap}
 @media (max-width:640px){.cv-link .long{display:none}}
 @media (max-width:1100px) and (min-width:761px){.nav a{padding:8px 10px;font-size:.9rem}.cv-link .long{display:none}}
+
+/* Filter: skjul kort, uanset hvilken display-type kortet ellers har (fx .card.feature) */
+.card.hide{display:none !important}

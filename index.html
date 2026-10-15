@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 <script>
   /* Sæt tema før siden tegnes, så den ikke blinker */
   (function(){try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
@@ -114,34 +114,30 @@
       <p class="lead small reveal">Hvordan kan Valg.dk understøtte borgere, journalister, analytikere og kommunale medarbejdere gennem informationsarkitektur og præsentation af data? Projektet undersøger, hvor brugerne møder friktion, og udvikler en prototype af en ny informationsstruktur.</p>
     </div>
 
-    <div class="concept reveal">
+    <div class="concept proto reveal">
       <div class="concept-side">
+        <p class="kicker">Håndkodet prototype · HTML, CSS og JavaScript</p>
+        <h3 class="proto-title">Et nyt Valg.dk, bygget op om brugernes spørgsmål</h3>
+        <p class="proto-text">Forsiden starter med det, brugerne kommer for: at finde resultatet for deres kommune, sammenligne områder og hente data. Resultaterne vises på et interaktivt kort, og man kan skifte mellem valgdeltagelse og største parti.</p>
         <dl class="facts">
           <div><dt>Samarbejde</dt><dd>KOMBIT</dd></div>
-          <div><dt>Min rolle</dt><dd>UX research og konceptudvikling</dd></div>
+          <div><dt>Min rolle</dt><dd>UX research, konceptudvikling og kode</dd></div>
           <div><dt>Brugertest</dt><dd>11. november 2026</dd></div>
           <div><dt>Afleveres</dt><dd>18. december 2026</dd></div>
         </dl>
-        <p class="hint">Prøv konceptet: vælg en brugergruppe og se, hvordan forsiden tilpasser sig.</p>
-        <div class="persona-tabs" role="tablist" aria-label="Vælg brugergruppe">
-          <button role="tab" aria-selected="true" data-persona="borger">Borger</button>
-          <button role="tab" aria-selected="false" data-persona="journalist">Journalist</button>
-          <button role="tab" aria-selected="false" data-persona="analytiker">Analytiker</button>
-          <button role="tab" aria-selected="false" data-persona="kommune">Kommune</button>
-        </div>
+        <p class="card-actions">
+          <a class="button small" href="https://sinan-polat.github.io/valg.dk/" target="_blank" rel="noopener">Prøv prototypen ↗</a>
+        </p>
+        <p class="mock-note">Prototype til bachelorprojektet, ikke det officielle Valg.dk. Alle tal er eksempeldata.</p>
       </div>
 
-      <div class="browser" role="tabpanel" aria-live="polite">
-        <div class="browser-bar"><i></i><i></i><i></i><span>valg.dk/<b class="mock-path">borger</b></span></div>
-        <div class="browser-body">
-          <p class="mock-kicker">Indgang for <span class="mock-who">borgere</span></p>
-          <h3 class="mock-title">Hvem blev valgt i min kommune?</h3>
-          <div class="mock-search"><span>⌕</span><span class="mock-placeholder">Skriv din kommune eller dit postnummer</span></div>
-          <ul class="mock-tasks"></ul>
-          <div class="mock-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <p class="mock-note">Konceptskitse med fiktive tal. Viser princippet om indgange efter brugergruppe.</p>
+      <a class="browser proto-shot" href="https://sinan-polat.github.io/valg.dk/" target="_blank" rel="noopener" aria-label="Åbn Valg.dk-prototypen i en ny fane">
+        <div class="browser-bar"><i></i><i></i><i></i><span>sinan-polat.github.io/<b>valg.dk</b></span></div>
+        <div class="proto-frame">
+          <img src="work/valg-prototype/forside.jpg" alt="Forsiden af Valg.dk-prototypen med søgefelt, tre indgange og kort over kommunalvalg 2025" loading="lazy" width="1400" height="744">
+          <span class="proto-cta">Åbn prototypen ↗</span>
         </div>
-      </div>
+      </a>
     </div>
 
     <div class="process">
@@ -493,6 +489,6 @@
 </div>
 
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="script.js?v=5" defer></script>
+<script src="script.js?v=6" defer></script>
 </body>
 </html>

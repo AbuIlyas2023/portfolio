@@ -160,37 +160,6 @@
   }), { threshold: 0.6 });
   $$('[data-count]').forEach(el => countIO.observe(el));
 
-  /* ---------- Bachelor: koncept med indgange pr. brugergruppe ---------- */
-  const personas = {
-    borger:     { path: 'borger', who: 'borgere', title: 'Hvem blev valgt i min kommune?', search: 'Skriv din kommune eller dit postnummer',
-                  tasks: ['Se resultatet for dit valgsted', 'Hvem blev valgt?', 'Sammenlign med sidste valg'], chart: [40, 65, 30, 55, 20, 45] },
-    journalist: { path: 'presse', who: 'journalister', title: 'Tallene til historien, hurtigt', search: 'Søg efter parti, kandidat eller område',
-                  tasks: ['Største ændringer siden sidst', 'Hent tabel som CSV', 'Citerbar kilde og tidsstempel'], chart: [85, 30, 70, 25, 60, 40] },
-    analytiker: { path: 'data', who: 'analytikere', title: 'Rådata, tidsserier og API', search: 'Søg i datasæt og variabler',
-                  tasks: ['Datasæt og API-adgang', 'Tidsserier på tværs af valg', 'Dokumentation af variabler'], chart: [20, 35, 50, 65, 80, 95] },
-    kommune:    { path: 'kommune', who: 'kommunale medarbejdere', title: 'Afvikling og opgørelse af valget', search: 'Søg i vejledninger og frister',
-                  tasks: ['Status på indberetning', 'Frister og tjeklister', 'Vejledninger til valgstyrere'], chart: [60, 60, 80, 45, 90, 70] }
-  };
-  const mock = $('.browser-body');
-  const setPersona = key => {
-    const p = personas[key];
-    mock.classList.add('swap');
-    setTimeout(() => {
-      $('.mock-path').textContent = p.path;
-      $('.mock-who').textContent = p.who;
-      $('.mock-title').textContent = p.title;
-      $('.mock-placeholder').textContent = p.search;
-      $('.mock-tasks').innerHTML = p.tasks.map(t => `<li>${t}</li>`).join('');
-      $$('.mock-chart i').forEach((b, i) => { b.style.height = p.chart[i] + '%'; });
-      mock.classList.remove('swap');
-    }, 200);
-  };
-  $$('.persona-tabs button').forEach(btn => btn.addEventListener('click', () => {
-    $$('.persona-tabs button').forEach(b => b.setAttribute('aria-selected', b === btn));
-    setPersona(btn.dataset.persona);
-  }));
-  setPersona('borger');
-
   /* ---------- Bachelor: Double Diamond ---------- */
   const steps = [
     { t: 'Discover', d: 'Interviews og observationer med brugere af Valg.dk, så jeg kunne forstå, hvem der bruger siden, hvad de leder efter, og hvor de går i stå.',
